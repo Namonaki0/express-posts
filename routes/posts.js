@@ -32,8 +32,6 @@ router.get("/:id", (req, res) => {
 
 // Create a post
 router.post("/", (req, res) => {
-  console.log(req.body);
-
   const newPost = {
     id: posts.length + 1,
     title: req.body.title,
@@ -46,6 +44,19 @@ router.post("/", (req, res) => {
   posts.push(newPost);
 
   res.status(201).json(posts);
+});
+
+// Update a post
+router.put("/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const post = posts.find((post) => post.id === id);
+
+  if (!post) {
+    return res.status(404).json({ message: `Cannot find post with id ${id}` });
+  }
+
+  post.title = req.body.title;
+  res.status(200).json(posts);
 });
 
 export default router;
