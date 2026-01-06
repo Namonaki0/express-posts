@@ -64,7 +64,7 @@ export const updatePost = (req, res, next) => {
   res.status(200).json(posts);
 };
 
-// @desc    Delete post
+// @desc    Delete a post
 // @route   DELETE /api/posts/:id
 export const deletePost = (req, res, next) => {
   const id = parseInt(req.params.id);
