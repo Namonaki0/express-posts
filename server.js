@@ -17,11 +17,23 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+// Configure EJS
+app.set("view engine", "ejs");
+app.set("views", "views");
+
+app.get("/", (req, res) => {
+  res.render("index", {
+    title: "Welcome",
+    message: "Hello testing",
+    people: ["Jack", "Mark", "John"],
+  });
+});
+
 // Logger middleware
 app.use(logger);
 
 // setup static folder
-app.use(express.static(path.join(__dirname, "public")));
+// app.use(express.static(path.join(__dirname, "public")));
 
 // Routes
 app.use("/api/posts", posts);
